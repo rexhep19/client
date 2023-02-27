@@ -1,25 +1,27 @@
 import "./post.css";
+import { Link } from "react-router-dom";
 
-function Post() {
+function Post({ post }) {
+  const PublicFolder = "http://localhost:5000/images/";
+
   return (
     <div className="post">
-      <img
-        className="postImg"
-        src="https://images.pexels.com/photos/3672776/pexels-photo-3672776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        alt=""
-      />
+      {post.photo && (
+        <img className="postImg" src={PublicFolder + post.photo} alt="" />
+      )}
       <div className="headerInfo">
-        <span className="category">Music</span>
-        <span className="postTitle">New post</span>
-        <span className="postTime">I hour ago</span>
-        <p className="postDesc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
-          dolores aspernatur alias cumque harum sunt beatae veniam quam. Quam
-          dolorem suscipit eum, consequuntur totam voluptatem ex inventore
-          quaerat. Distinctio cupiditate excepturi voluptates quam at temporibus
-          natus repellendus fuga unde laborum quod recusandae quo dolores
-          necessitatibus eum voluptas aspernatur, officia cumque.
-        </p>
+        <span className="category">
+          {post.categories.map((c) => (
+            <span className="postCat">{c.name}</span>
+          ))}
+        </span>
+        <Link className="link" to={`/post/${post._id}`}>
+          <span className="postTitle">{post.title}</span>
+        </Link>
+        <span className="postTime">
+          {new Date(post.createdAt).toDateString()}
+        </span>
+        <p className="postDesc">{post.desc}</p>
       </div>
       <p></p>
     </div>

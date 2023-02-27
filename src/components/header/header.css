@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 100px;
+    position: relative;
 }
 .headerText{
     display: flex;
